@@ -117,7 +117,9 @@ class IndexPage extends React.Component {
           </Content>
         </Layout>
         <Footer>
-          <div className={styles.footer}>Footer</div>
+          <div className={styles.footer}>
+            <span>@版权所有</span>
+          </div>
         </Footer>
       </Layout>
     );
