@@ -1,0 +1,88 @@
+.loginContent {
+    height: 100%;
+    min-height: 650px;
+    min-width: 500px;
+    position: relative;
+    background: linear-gradient(45deg, #020031 0, #6d3353 100%);
+    :global {
+        .ant-tabs-nav {
+            width: 100%;
+        }
+        .ant-tabs-nav .ant-tabs-tab {
+            width: 50%;
+            text-align: center;
+            color: #ddd;
+        }
+        .ant-tabs-nav .ant-tabs-tab-active {
+            color: #1890ff
+        }
+    }
+}
+
+:global {
+    .rightRotate {
+        transform: rotateX(15deg) rotateY(15deg);
+        box-shadow: -20px 20px 20px 0px #ddd;
+    }
+    .leftRotate {
+        transform: rotateX(15deg) rotateY(-15deg);
+        box-shadow: 20px 20px 20px 0px #ddd
+    }
+    .loginBoard {
+        transition: all .3s;
+        position: absolute;
+        width: 400px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        left: 50%;
+        top: 10%;
+        margin-left: -200px;
+        padding: 15px 30px;
+        .login_title {
+            text-align: center;
+            display: flex;
+            height: 65px;
+            align-items: center;
+            justify-content: center;
+            .login_logo {
+                width: 100px;
+            }
+            .login_text {
+                display: inline-block;
+                color: #fff;
+                padding-left: 20px;
+                line-height: 30px;
+                font-size: 30px;
+            }
+        }
+        .description {
+            text-align: center;
+            color: #ccc;
+            padding: 15px 0 0;
+        }
+        .login_form {
+            margin-top: 20px;
+            color: #fff;
+            position: relative;
+            .login_form_button {
+                width: 100%;
+            }
+            .login_form_remember {
+                color: #ddd;
+            }
+            .login_form_forgot {
+                float: right;
+            }
+        }
+    }
+    .footer {
+        transition: all .3s;
+        position: absolute;
+        bottom: 70px;
+        text-align: center;
+        width: 100%;
+        padding: 30px;
+        color: #ddd;
+        box-shadow: none;
+    }
+}
