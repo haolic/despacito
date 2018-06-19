@@ -15,6 +15,18 @@ import {
 const FormItem = Form.Item;
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    };
+  }
+  handleTabClick(tab) {
+    this.props.dispatch({
+      type: 'login/handleTabClick',
+      payload: tab,
+    })
+  }
   handleFocus(trigger) {
     // var data = this.props.form.getFieldsValue();
     // console.log(data);
@@ -36,10 +48,17 @@ class Login extends React.Component {
           password: values.passwordReg,
           ...values
         };
+        this.setState({
+          isLoading: true
+        });
         this.props.dispatch({
           type: 'login/register',
           payload: postData,
-        })
+        }).then(() => {
+          this.setState({
+            isLoading: false
+          })
+        });
       }
     })
   }
@@ -59,15 +78,15 @@ class Login extends React.Component {
     return (
       <div className={styles.loginContent}>
         <div className={loginBoardClass}>
-          <Spin spinning={login.isLoading}>
+          <Spin spinning={this.state.isLoading} indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />}>
             <div className="login_title">
               <img className="login_logo" src="/src/assets/imgs/logo.png" width="100" alt="Despacito" />
               <span className="login_text">DESPACITO</span>
             </div>
             <div className="description">Despacito是西湖区最具影响力的 Web 设计规范</div>
             <div className="login_form">
-              <Tabs defaultActiveKey="1" tabBarGutter={0}>
-                <Tabs.TabPane tab="登陆" key="1">
+              <Tabs onTabClick={this.handleTabClick.bind(this)} activeKey={login.activeKey} tabBarGutter={0}>
+                <Tabs.TabPane tab="登陆" key="tabLogin">
                   <Form>
                     <FormItem>
                       {getFieldDecorator('userName', {
@@ -113,7 +132,7 @@ class Login extends React.Component {
                     </FormItem>
                   </Form>
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="注册" key="2">
+                <Tabs.TabPane tab="注册" key="tabReg">
                   <Form>
                     <FormItem>
                       {getFieldDecorator('userNameReg', {

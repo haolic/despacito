@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'dva/router';
 import { connect } from 'dva';
 import styles from './IndexPage.less';
+import $ from 'jquery';
 import {
   Layout,
   Menu,
   Dropdown,
   Icon,
+  Pagination,
 } from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -17,6 +19,14 @@ class IndexPage extends React.Component {
     const { dispatch } = this.props;
     dispatch({
       type: 'indexPage/toggleCollapse'
+    })
+  }
+  componentDidMount() {
+    $('.ant-pagination-item-active').siblings('.ant-pagination-item, .ant-pagination-jump-next').hide();
+  }
+  pageChange() {
+    setTimeout(() => {
+      $('.ant-pagination-item-active').show().siblings('.ant-pagination-item, .ant-pagination-jump-next, .ant-pagination-jump-prev').hide();
     })
   }
   render() {
@@ -33,6 +43,14 @@ class IndexPage extends React.Component {
         </Menu.Item>
       </Menu>
     );
+    const itemRender = (current, type, originalElement) => {
+      if (type === 'prev') {
+        return <span>Previous</span>;
+      } else if (type === 'next') {
+        return <span>Next</span>;
+      }
+      return originalElement;
+    }
     return (
       <Layout>
         <Header>
@@ -113,6 +131,14 @@ class IndexPage extends React.Component {
               <p>12345</p>
               <p>12345</p>
               <p>12345</p>
+              <Pagination
+                onShowSizeChange={this.pageChange.bind(this)}
+                onChange={this.pageChange.bind(this)}
+                total={500}
+                showSizeChanger
+                showQuickJumper
+                itemRender={itemRender}
+              />
             </div>
           </Content>
         </Layout>
