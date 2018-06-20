@@ -2,11 +2,16 @@ import { routerRedux } from 'dva/router';
 import { register, login } from './../services/api';
 import { message } from 'antd';
 
+message.config({
+    top: 100,
+    duration: .75,
+})
+
 export default {
     namespace: 'login',
     state: {
         isRightRotate: true,
-        isLoading: false,
+        activeKey: 'tabLogin'
     },
     effects: {
         * login({ payload }, { put, call }) {
@@ -29,10 +34,17 @@ export default {
             state.isRightRotate = trigger === 'username' ? true : false;
             return { ...state };
         },
+        handleTabClick(state, { payload: tab }) {
+            state.activeKey = tab;
+            return { ...state };
+        },
         tips(state, { payload: data }) {
             if (data.code === 1) {
+                message.destroy()
                 message.success(data.msg);
+                state.activeKey = 'tabLogin'                
             } else {
+                message.destroy()
                 message.warning(data.msg);
             }
             return { ...state }
