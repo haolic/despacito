@@ -13,6 +13,6 @@ function RouterConfig({ history }) {
       </Switch>
     </Router>
   );
-}
+};
 
 export default RouterConfig;

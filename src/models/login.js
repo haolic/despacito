@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import { register } from './../services/api';
+import { register, login } from './../services/api';
 import { message } from 'antd';
 
 export default {
@@ -9,8 +9,14 @@ export default {
         isLoading: false,
     },
     effects: {
-        * login({ payload }, { put }) {
-            yield put(routerRedux.push('/index'));
+        * login({ payload }, { put, call }) {
+            const { data } = yield call(login, payload);
+            if (data.code === 0) {
+                message.warning(data.msg);
+            } else {
+                localStorage.setItem('userInfo', JSON.stringify(payload));
+                yield put(routerRedux.push('/index'));
+            }
         },
         * register({ payload: formData }, { put, call }) {
             yield put({ type: 'showLoading' });

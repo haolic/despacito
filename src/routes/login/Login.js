@@ -24,8 +24,17 @@ class Login extends React.Component {
     })
   }
   login() {
-    this.props.dispatch({
-      type: 'login/login'
+    this.props.form.validateFields(['userName', 'password'], (err, values) => {
+      if (!err) {
+        let postData = {
+          userName: values.userName,
+          password: values.password,
+        }
+        this.props.dispatch({
+          type: 'login/login',
+          payload: postData,
+        });
+      }
     });
   }
   register() {

@@ -21,12 +21,17 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-  .then(parseJSON)
-  .then(data => ({ data }))
-  .catch(err => {
-    console.error(err);
-    return { err }
-  });
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    ...options
+  }).then(checkStatus)
+    .then(parseJSON)
+    .then(data => ({ data }))
+    .catch(err => {
+      console.error(err);
+      return { err }
+    });
 }
