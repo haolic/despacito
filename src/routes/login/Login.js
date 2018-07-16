@@ -89,7 +89,7 @@ class Login extends React.Component {
         <div className={loginBoardClass}>
           <Spin spinning={this.state.isLoading} indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />}>
             <div className="login_title">
-              <img className="login_logo" src="/src/assets/imgs/logo.png" width="100" alt="Despacito" />
+              <img className="login_logo" src="./imgs/logo.png" width="100" alt="Despacito" />
               <span className="login_text">DESPACITO</span>
             </div>
             <div className="description">Despacito是西湖区最具影响力的 Web 设计规范</div>

@@ -55,7 +55,7 @@ class IndexPage extends React.Component {
       <Layout>
         <Header>
           <header className={styles.header}>
-            <img style={{ cursor: 'pointer' }} src="/src/assets/imgs/logo.png" width="70" alt="DESPACITO" />
+            <img style={{ cursor: 'pointer' }} src="./imgs/logo.png" width="70" alt="DESPACITO" />
             <span className={styles.title}>DESPACITO</span>
             <div className={styles.userarea}>
               <span>欢迎您：</span>
